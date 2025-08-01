@@ -90,7 +90,7 @@
             position: relative;
             width: 400px;
             height: 280px;
-            background: white;
+            background: #ffffff;
             border: 4px solid #8b4513;
             border-radius: 15px;
             cursor: pointer;
@@ -118,6 +118,8 @@
             justify-content: space-between;
             padding: 30px;
             z-index: 10;
+            background: #ffffff;
+            border-radius: 11px;
         }
         
         .envelope-top {
@@ -186,11 +188,13 @@
             left: 0;
             width: 100%;
             height: 96px;
-            background: linear-gradient(135deg, #d4a574 0%, #8b4513 100%);
+            background: #ffffff;
+            border: 3px solid #8b4513;
+            border-bottom: none;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
-            z-index: 5;
+            z-index: 15;
             transition: all 1.2s ease;
-            border-bottom: 2px solid #8b4513;
+            border-radius: 11px 11px 0 0;
         }
         
         .envelope.opening .envelope-flap {
@@ -200,13 +204,15 @@
         
         .click-hint {
             position: absolute;
-            bottom: -60px;
+            bottom: -50px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 18px;
             color: #8b4513;
             font-weight: 600;
             animation: bounce 2s ease-in-out infinite;
+            white-space: nowrap;
+            text-align: center;
         }
         
         @keyframes bounce {
@@ -415,7 +421,7 @@
                 </div>
             </div>
             <div class="envelope-icon heart-icon">❤️</div>
-            <div class="envelope-icon mail-icon">📧</div>
+            <div class="envelope-icon mail-icon">✉️</div>
             <div class="click-hint">Click to open your letter ❤️</div>
         </div>
         
@@ -429,7 +435,7 @@
             <div class="letter-content">
                 <p>This moment isn't just a day on the calendar. Today is National Girlfriend's Day — a reminder of how incredibly lucky I am to have you by my side. </p>
                 
-                <p>Every moment I spend with you is like a gift. </p>
+                <p>Every moment I spend with you is like a gift. ✨</p>
                 
                 <p>You've brought me many memories that I will cherish for eternity, and your smile is my favorite of them all. It always gives me the fizziest feeling when you smile. </p>
                 
@@ -443,7 +449,7 @@
                 
                 <p>I know I wasn't the easiest person to love back then. It was difficult, but you stayed, forgave me, and accepted me. You believed in me — that means the world to me. I couldn't ask for anything else. </p>
                 
-                <p>You're not just my girlfriend — you're more than that. You're my safe place and my family. ❤</p>
+                <p>You're not just my girlfriend — you're more than that. You're my safe place and my family. </p>
                 
                 <p>You'll be the person that I choose every day. </p>
             </div>
