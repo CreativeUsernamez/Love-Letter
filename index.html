@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter for You</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f4f0 0%, #f5f1ed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+        }
+        
+        .envelope {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 280px;
+            background: white;
+            border: 2px solid #d4a574;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .envelope:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .envelope-front {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .envelope-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #8b4513;
+            margin-bottom: 15px;
+        }
+        
+        .from-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #8b4513;
+            font-style: italic;
+        }
+        
+        .click-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #8b4513;
+            opacity: 0.7;
+        }
+        
+        .letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            max-height: 600px;
+            background: white;
+            border: 3px solid #d4a574;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            overflow-y: auto;
+        }
+        
+        .letter.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .letter-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .letter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+        
+        .letter-greeting {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #8b4513;
+            font-style: italic;
+        }
+        
+        .letter-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .letter-content p {
+            margin-bottom: 15px;
+        }
+        
+        .letter-signature {
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #8b4513;
+            font-style: italic;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #d4a574;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: #b8935f;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .envelope {
+                width: 300px;
+                height: 210px;
+            }
+            
+            .letter {
+                width: 90vw;
+                max-width: 400px;
+                padding: 25px;
+                max-height: 80vh;
+            }
+            
+            .envelope-text {
+                font-size: 20px;
+            }
+            
+            .letter-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Envelope -->
+        <div class="envelope" id="envelope" onclick="openLetter()">
+            <div class="envelope-front">
+                <div class="envelope-text">To: Love</div>
+                <div class="from-text">From: Me :)</div>
+                <div class="click-hint">Click to open</div>
+            </div>
+        </div>
+        
+        <!-- Letter -->
+        <div class="letter" id="letter">
+            <button class="close-btn" onclick="closeLetter()">×</button>
+            <div class="letter-header">
+                <h1 class="letter-title">Happy National Girlfriend's Day!</h1>
+                <p class="letter-greeting">To My Beloved,</p>
+            </div>
+            <div class="letter-content">
+                <p>On this special day dedicated to celebrating girlfriends everywhere, I couldn't let it pass without telling you just how much you mean to me.</p>
+                
+                <p>You bring so much joy, laughter, and love into my life every single day. Your smile lights up my world, and your kindness touches everyone around you. I'm constantly amazed by your strength, your intelligence, and the beautiful way you see the world.</p>
+                
+                <p>Thank you for being my partner, my best friend, and the person I can always count on. Thank you for all the little things you do that make life so much sweeter - from your warm hugs to your silly jokes that always make me laugh, even on the toughest days.</p>
+                
+                <p>I love how we can talk for hours about everything and nothing, how you challenge me to be better, and how you support my dreams just as much as I support yours. You make even the ordinary moments feel special.</p>
+                
+                <p>I'm so grateful that you're mine, and I'm yours. Here's to many more adventures together, more inside jokes, more cozy movie nights, and more reasons to celebrate our love.</p>
+                
+                <p>Happy National Girlfriend's Day, beautiful. I love you more than words can express.</p>
+            </div>
+            <div class="letter-signature">
+                With all my love,<br>
+                Your love
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openLetter() {
+            document.getElementById('envelope').classList.add('hidden');
+            document.getElementById('letter').classList.add('open');
+        }
+        
+        function closeLetter() {
+            document.getElementById('letter').classList.remove('open');
+            document.getElementById('envelope').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
