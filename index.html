@@ -7,6 +7,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
         
+        /* Ensure fonts load properly on all devices */
+        html {
+            font-display: swap;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -19,6 +24,9 @@
             background: linear-gradient(135deg, #d4a574 0%, #f5deb3 50%, #dda0dd 100%);
             overflow: hidden;
             position: relative;
+            touch-action: manipulation; /* Better touch handling */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         /* Floating Hearts Background */
@@ -88,6 +96,11 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            opacity: 1;
+            visibility: visible;
+            z-index: 10;
         }
         
         .envelope:hover {
@@ -205,7 +218,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
             width: 90vw;
             max-width: 700px;
             max-height: 90vh;
@@ -216,7 +229,7 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.25);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow-y: auto;
             z-index: 20;
         }
@@ -224,6 +237,7 @@
         .letter.open {
             opacity: 1;
             visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
         }
         
         .letter-header {
@@ -299,12 +313,12 @@
         }
         
         .hidden {
-            display: none;
+            display: none !important;
         }
         
         /* Romantic quote at bottom */
         .romantic-quote {
-            position: absolute;
+            position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
@@ -314,6 +328,13 @@
             font-style: italic;
             font-size: 16px;
             opacity: 0.7;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .letter.open ~ .romantic-quote {
+            opacity: 0;
+            pointer-events: none;
         }
         
 
@@ -339,6 +360,7 @@
             .envelope {
                 width: 320px;
                 height: 220px;
+                margin: 20px;
             }
             
             .envelope-text {
@@ -353,6 +375,7 @@
                 width: 95vw;
                 padding: 25px;
                 max-height: 85vh;
+                margin: 10px;
             }
             
             .letter-title {
@@ -461,6 +484,8 @@
             letter.classList.remove('open');
             setTimeout(() => {
                 envelope.classList.remove('hidden', 'opening');
+                envelope.style.opacity = '1';
+                envelope.style.visibility = 'visible';
             }, 500);
         }
         
@@ -468,18 +493,29 @@
             const container = document.querySelector('.container');
             const colors = ['#d4a574', '#8b4513', '#dda0dd', '#f5deb3'];
             
+            // Get envelope position for better sparkle placement
+            const envelope = document.getElementById('envelope');
+            const envelopeRect = envelope.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
             for (let i = 0; i < 12; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
                 sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                sparkle.style.left = `${200 + Math.random() * 200}px`;
-                sparkle.style.top = `${140 + Math.random() * 200}px`;
+                
+                // Position sparkles around the envelope
+                const offsetX = envelopeRect.left - containerRect.left;
+                const offsetY = envelopeRect.top - containerRect.top;
+                sparkle.style.left = `${offsetX + Math.random() * envelopeRect.width}px`;
+                sparkle.style.top = `${offsetY + Math.random() * envelopeRect.height}px`;
                 sparkle.style.animation = `sparkle 2s ease-out ${Math.random() * 0.5}s`;
                 
                 container.appendChild(sparkle);
                 
                 setTimeout(() => {
-                    sparkle.remove();
+                    if (sparkle.parentNode) {
+                        sparkle.remove();
+                    }
                 }, 2500);
             }
         }
